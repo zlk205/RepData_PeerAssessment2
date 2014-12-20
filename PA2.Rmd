@@ -16,7 +16,9 @@ Administration's (NOAA) Storm Database:
 The following document contains the text, code and output that is used to address these specific questions.
 
 
-##Loading the NOAA Storm Data
+##Data Processing
+
+###Loading the NOAA Storm Data
 
 The first step is to download the zipped data file and save it to an assigned location.
 
@@ -40,7 +42,9 @@ dat<-read.csv(bzfile("./NOAA_Data/StormData.csv.bz2"))
 
 
 
-##Which type of events are most harmful with respect to population health?
+##Results
+
+###Which type of events are most harmful with respect to population health?
 
 I have decided to define "population health" as the combined total number of fatalities and injuries for each event type.
 The following code adds these field together into a new column called 'pop.health'.  The new column is then added to the data frame.
@@ -114,7 +118,7 @@ From this data, I would recommend that the majority of efforts and resources sho
 
 
 
-##Which type of events have the greatest economic consequences?
+###Which type of events have the greatest economic consequences?
 
 In order to address the question of economic impact from weather events, the data must be adjusted to reflect the real dollar amounts
 associated with the costs of property and crop damage.  The data consists of 4 fields that will be used for this purpose.  Both property and crop damage contains a field with a dollar amount and a field with a multiplier level (K = $1 thoudand, M = $1 million, B = $1 billion).  
@@ -204,5 +208,7 @@ damage combined over the full timeframe of the dataset (1950-2011). The rest of 
 summary(sum.dat2$TotalDamage)
 ```
 
+
+##Summary
 
 Although the previous discussion, which considered the impact of weather events on population health, suggested that the majority of resources should be focused on tornado prevention and emergency aid, the second plot indicates that, with concern for economic consequences, the top 4 weather events at the least (floods, hurricanes/typhoons, tornados, and storm surges) all deserve a significant amount of attention and resouces based on the total costs in property and crop damage that these weather events have inflicted over the course of the dataset (ranging from $43 billion for storm surges to $150 billion for floods).

@@ -64,8 +64,10 @@ if (window.hljs && document.readyState && document.readyState === "complete") {
 <li><p>Which type of weather events have the greatest economic consequences?</p></li>
 </ol>
 <p>The following document contains the text, code and output that is used to address these specific questions.</p>
-<div id="loading-the-noaa-storm-data" class="section level2">
-<h2>Loading the NOAA Storm Data</h2>
+<div id="data-processing" class="section level2">
+<h2>Data Processing</h2>
+<div id="loading-the-noaa-storm-data" class="section level3">
+<h3>Loading the NOAA Storm Data</h3>
 <p>The first step is to download the zipped data file and save it to an assigned location.</p>
 <pre class="r"><code>if(!file.exists(&quot;./NOAA_Data&quot;)){
         dir.create(&quot;./NOAA_Data&quot;)
@@ -83,8 +85,11 @@ download.file(fileUrl,destfile=&quot;./NOAA_Data/StormData.csv.bz2&quot;,method=
 <pre><code>## [1] &quot;C&quot;</code></pre>
 <pre class="r"><code>dat&lt;-read.csv(bzfile(&quot;./NOAA_Data/StormData.csv.bz2&quot;))</code></pre>
 </div>
-<div id="which-type-of-events-are-most-harmful-with-respect-to-population-health" class="section level2">
-<h2>Which type of events are most harmful with respect to population health?</h2>
+</div>
+<div id="results" class="section level2">
+<h2>Results</h2>
+<div id="which-type-of-events-are-most-harmful-with-respect-to-population-health" class="section level3">
+<h3>Which type of events are most harmful with respect to population health?</h3>
 <p>I have decided to define “population health” as the combined total number of fatalities and injuries for each event type. The following code adds these field together into a new column called ‘pop.health’. The new column is then added to the data frame.</p>
 <pre class="r"><code>pop.health&lt;-dat$FATALITIES + dat$INJURIES
 dat&lt;-data.frame(dat,pop.health)</code></pre>
@@ -135,8 +140,8 @@ legend(&quot;topright&quot;,legend=&quot;Overall average number of injuries &amp
 ##       0       0       0     158       0   96980</code></pre>
 <p>From this data, I would recommend that the majority of efforts and resources should be focused on tornado prevention and emergency aid in response to tornados.</p>
 </div>
-<div id="which-type-of-events-have-the-greatest-economic-consequences" class="section level2">
-<h2>Which type of events have the greatest economic consequences?</h2>
+<div id="which-type-of-events-have-the-greatest-economic-consequences" class="section level3">
+<h3>Which type of events have the greatest economic consequences?</h3>
 <p>In order to address the question of economic impact from weather events, the data must be adjusted to reflect the real dollar amounts associated with the costs of property and crop damage. The data consists of 4 fields that will be used for this purpose. Both property and crop damage contains a field with a dollar amount and a field with a multiplier level (K = $1 thoudand, M = $1 million, B = $1 billion).</p>
 <p>The following code creates a function that will be used to multiply the dollar amount from the one field with the appropriate level in order to get the real dollar amount for each event.</p>
 <pre class="r"><code>multiplier&lt;-function(x) if(is.null(x) || is.na(x)){1
@@ -186,6 +191,10 @@ legend(&quot;topright&quot;,legend=&quot;Overall average value of property and c
 <pre class="r"><code>summary(sum.dat2$TotalDamage)</code></pre>
 <pre><code>##      Min.   1st Qu.    Median      Mean   3rd Qu.      Max. 
 ## 0.000e+00 0.000e+00 0.000e+00 4.837e+08 8.500e+04 1.503e+11</code></pre>
+</div>
+</div>
+<div id="summary" class="section level2">
+<h2>Summary</h2>
 <p>Although the previous discussion, which considered the impact of weather events on population health, suggested that the majority of resources should be focused on tornado prevention and emergency aid, the second plot indicates that, with concern for economic consequences, the top 4 weather events at the least (floods, hurricanes/typhoons, tornados, and storm surges) all deserve a significant amount of attention and resouces based on the total costs in property and crop damage that these weather events have inflicted over the course of the dataset (ranging from $43 billion for storm surges to $150 billion for floods).</p>
 </div>
 
